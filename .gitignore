@@ -1,0 +1,21 @@
+node_modules/
+*.map
+
+# The repo-root .gitignore ignores *.json globally (Go project); the plugin's
+# JSON (manifest.json, versions.json, cli.json, cli-checksums.json, package*.json,
+# tsconfig.json) must be tracked, so re-include them here.
+!*.json
+
+# Build artifacts (produced by `npm run bundle`)
+main.js
+bin/
+tvault-core
+tvault-core.exe
+
+# IDE
+.idea/
+*.iml
+
+# Cache and metadata
+.DS_Store
+**/.DS_Store

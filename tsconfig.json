@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "module": "ESNext",
+    "target": "ES2020",
+    "allowJs": false,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "lib": ["DOM", "ES2020"],
+    "types": ["node"]
+  },
+  "include": ["main.ts"]
+}

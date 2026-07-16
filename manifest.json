@@ -1,0 +1,10 @@
+{
+  "id": "tvault",
+  "name": "TVault",
+  "version": "0.1.0",
+  "minAppVersion": "1.5.0",
+  "description": "Lock your notes into an encrypted container and unlock them again, powered by the tvault-core CLI.",
+  "author": "Nameless Corp",
+  "authorUrl": "https://tvault.app",
+  "isDesktopOnly": true
+}
