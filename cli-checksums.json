@@ -1,8 +1,8 @@
 {
-  "tvault-core-darwin-amd64": "6d3b792e657fadc568574f73cfe799cab249b4e337416dcf4781e2a902352753",
-  "tvault-core-darwin-arm64": "b97b1f083707c3a747abea413cc81c2ac7dbda80bb1074471c5339d7106e176f",
-  "tvault-core-linux-amd64": "2c322dd4956190b6427f5005102dbebebd6d6f58a75eceebf72d66baa13578d4",
-  "tvault-core-linux-arm64": "1a1c3700f5c8b26c96a5573314f2029c20aac0cbf679e7175076de997cd20bda",
-  "tvault-core-windows-amd64.exe": "c2817605adebb6c97a5553ab198ad5ed38e7aa8fb4b4929c5f800e363f0dd4ac",
-  "tvault-core-windows-arm64.exe": "c57066b473ff628b9d41a34ffffe8d65f17d7fef690dc1f57d2c88b31024b205"
+  "tvault-core-darwin-amd64": "8ad430beefb4184d9d309e98efa5b54a30705b6abf1e8ed32f140c1582ff5f94",
+  "tvault-core-darwin-arm64": "14318d5d799e365ebbf0580ebeefd0c7783c47bc294df5191b821ad5e77289f3",
+  "tvault-core-linux-amd64": "1a30de1fde457bc4c5e5349a4fdd73ee535556bb952d465e49940cee426f22d2",
+  "tvault-core-linux-arm64": "75d89ed2b8b0fa0c5dfbbaa62236ea0383c98a322f9622557ce23d88bf00bf77",
+  "tvault-core-windows-386.exe": "b3f2091f90de4adb0b0b0ffac3442d4dd28e6d3c6b29b4dd95856bef07d79445",
+  "tvault-core-windows-amd64.exe": "2680f577bf960ea4311d318bbc7c10c7d7830aee507f674b130836ce1558d1bd"
 }

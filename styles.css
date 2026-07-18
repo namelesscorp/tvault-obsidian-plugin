@@ -73,8 +73,7 @@
 }
 
 .tvault-field input,
-.tvault-field select,
-.tvault-tokens {
+.tvault-field select {
   width: 100%;
 }
 
@@ -127,10 +126,101 @@
   font-size: var(--font-ui-smaller);
 }
 
-.tvault-tokens {
+.tvault-token-row {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  margin-bottom: 0.3rem;
+}
+
+.tvault-token-idx {
+  flex: 0 0 auto;
+  min-width: 1.25em;
+  text-align: right;
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+  font-variant-numeric: tabular-nums;
+}
+
+.tvault-token-input {
+  flex: 1;
+  min-width: 0;
   font-family: var(--font-monospace);
   font-size: var(--font-ui-smaller);
-  resize: vertical;
+}
+
+.tvault-token-copy,
+.tvault-token-remove {
+  flex: 0 0 auto;
+}
+
+.tvault-token-remove {
+  padding-left: 0.55rem;
+  padding-right: 0.55rem;
+}
+
+.tvault-token-add {
+  align-self: flex-start;
+  margin-top: 0.15rem;
+}
+
+.tvault-held-note {
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+  line-height: 1.4;
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  margin-bottom: 0.5rem;
+}
+
+.tvault-linklike {
+  align-self: flex-start;
+  margin-top: 0.15rem;
+  background: transparent;
+  box-shadow: none;
+  padding: 0.15rem 0;
+  color: var(--text-accent);
+  cursor: pointer;
+}
+
+.tvault-info {
+  margin-bottom: 0.9rem;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  background: var(--background-secondary);
+}
+
+.tvault-info summary {
+  cursor: pointer;
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+  user-select: none;
+}
+
+.tvault-info[open] summary {
+  margin-bottom: 0.4rem;
+}
+
+.tvault-info-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: var(--font-ui-smaller);
+  padding: 0.1rem 0;
+}
+
+.tvault-info-label {
+  color: var(--text-muted);
+  flex: 0 0 auto;
+}
+
+.tvault-info-value {
+  color: var(--text-normal);
+  text-align: right;
+  word-break: break-word;
 }
 
 .tvault-run {
@@ -159,29 +249,42 @@
   color: var(--text-muted);
 }
 
+.tvault-entropy-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+}
+
+.tvault-entropy-box {
+  border: 1px solid var(--interactive-accent);
+  border-radius: 10px;
+  background: var(--background-secondary);
+  overflow: hidden;
+  line-height: 0;
+}
+
 .tvault-entropy-canvas {
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--background-modifier-border);
-  border-radius: 6px;
+  display: block;
   cursor: crosshair;
   touch-action: none;
-  display: block;
-  margin: 0.5rem 0;
 }
 
 .tvault-entropy-track {
-  width: 100%;
-  height: 8px;
-  border-radius: 4px;
+  height: 10px;
+  border-radius: 10px;
   background: var(--background-modifier-border);
   overflow: hidden;
-  margin-bottom: 0.75rem;
 }
 
 .tvault-entropy-bar {
   height: 100%;
   width: 0;
   background: var(--interactive-accent);
-  transition: width 0.1s linear;
+  transition: width 0.3s ease;
+}
+
+.tvault-entropy-label {
+  margin: 0;
 }

@@ -1,0 +1,9 @@
+node_modules/
+
+# Build artifacts
+main.js
+*.map
+bin/
+
+# Generated / vendored
+package-lock.json

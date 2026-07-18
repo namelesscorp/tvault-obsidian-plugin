@@ -25,7 +25,7 @@ previous entry), then open a PR:
   "name": "TVault",
   "author": "Nameless Corp",
   "description": "Lock your notes into an encrypted container and unlock them again, powered by the tvault-core CLI.",
-  "repo": "namelesscorp/obsidian-tvault"
+  "repo": "namelesscorp/tvault-obsidian-plugin"
 }
 ```
 
@@ -56,10 +56,11 @@ what you actually create). `id` must equal `manifest.json.id` (`tvault`).
 > **Unlock** restores them. Supports Shamir shares, a single master token, or a
 > passphrase, with optional HMAC token integrity and a draw-to-gather-entropy key.
 >
-> **Repo:** `namelesscorp/obsidian-tvault`
+> **Repo:** `namelesscorp/tvault-obsidian-plugin`
 > **Desktop only:** yes — the plugin drives the native `tvault-core` CLI.
 >
 > #### Note on the native binary (for reviewers)
+>
 > The plugin package contains only `main.js`, `manifest.json`, and `styles.css`.
 > On first use it downloads the `tvault-core` binary for the user's platform from
 > a pinned GitHub release (`namelesscorp/tvault-core@v1.1.0`) and **verifies it
