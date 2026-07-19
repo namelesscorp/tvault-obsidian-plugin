@@ -5,6 +5,16 @@ All notable changes to the TrustVault Obsidian plugin are documented in this fil
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.2] — 2026-07-20
+
+### Fixed
+
+- The in-app text (status bar, side-panel title, ribbon tooltip, notices and
+  dialogs) now reads "TrustVault", matching the plugin name.
+- The token-type selector (Shamir share / master / passphrase) now appears when
+  creating a container even before the vault has notes, so the type can be
+  chosen up front. It previously only showed once notes were present.
+
 ## [0.2.1] — 2026-07-19
 
 ### Changed
@@ -84,6 +94,7 @@ plugin) is always preserved.
 - Desktop only — the plugin runs a native binary.
 - Obsidian 1.7.2 or newer.
 
+[0.2.2]: https://github.com/namelesscorp/tvault-obsidian-plugin/releases/tag/0.2.2
 [0.2.1]: https://github.com/namelesscorp/tvault-obsidian-plugin/releases/tag/0.2.1
 [0.2.0]: https://github.com/namelesscorp/tvault-obsidian-plugin/releases/tag/0.2.0
 [0.1.0]: https://github.com/namelesscorp/tvault-obsidian-plugin/releases/tag/0.1.0

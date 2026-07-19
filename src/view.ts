@@ -47,7 +47,7 @@ export class TVaultView extends ItemView {
   }
 
   getDisplayText(): string {
-    return "TVault";
+    return "TrustVault";
   }
 
   getIcon(): string {
@@ -112,7 +112,7 @@ export class TVaultView extends ItemView {
     const root = this.contentEl;
     root.empty();
     root.addClass("tvault-panel");
-    root.createEl("h3", { text: "TVault" });
+    root.createEl("h3", { text: "TrustVault" });
 
     if (this.statusError) {
       root.createEl("p", { cls: "tvault-danger", text: this.statusError });
@@ -164,7 +164,7 @@ export class TVaultView extends ItemView {
     const unlocking = this.status.state === "locked";
 
     // Token type is only user-selectable for a first-ever seal.
-    if (locking && !this.status.containerExists) {
+    if (operation === "seal") {
       const field = root.createDiv({ cls: "tvault-field" });
       field.createEl("label", { text: "Token type" });
       const select = field.createEl("select");
@@ -208,7 +208,7 @@ export class TVaultView extends ItemView {
       );
     } else {
       // Integrity provider toggle — choosable only when creating the container.
-      if (locking && !this.status.containerExists) {
+      if (operation === "seal") {
         const toggle = root.createDiv({ cls: "tvault-field tvault-inline" });
         const checkbox = toggle.createEl("input", { type: "checkbox" });
         checkbox.checked = this.integrityEnabled;
@@ -227,7 +227,7 @@ export class TVaultView extends ItemView {
           (v) => (this.integrityPass = v),
           "Encrypts and verifies the tokens — required to unlock. Remember it.",
         );
-      } else if (locking && !this.status.containerExists) {
+      } else if (operation === "seal") {
         root.createEl("small", {
           cls: "tvault-hint",
           text: "Integrity off: the tokens alone unlock the vault (no passphrase). Keep them safe.",
@@ -271,7 +271,7 @@ export class TVaultView extends ItemView {
             "Token file path",
             this.tokenFilePath,
             (v) => (this.tokenFilePath = v),
-            "~/TVault/my-vault.keys.json",
+            "~/TrustVault/my-vault.keys.json",
           );
         } else {
           this.renderTokenInputs(root);
@@ -571,9 +571,9 @@ export class TVaultView extends ItemView {
     let target: string | null = null;
     try {
       const result = await dialog.showSaveDialog({
-        title: "Save TVault tokens",
+        title: "Save TrustVault tokens",
         defaultPath,
-        filters: [{ name: "TVault tokens", extensions: ["json"] }],
+        filters: [{ name: "TrustVault tokens", extensions: ["json"] }],
       });
       target = result && !result.canceled && result.filePath ? result.filePath : null;
     } catch {
@@ -635,7 +635,7 @@ export class TVaultView extends ItemView {
       return;
     }
     if (this.plugin.isRunning()) {
-      new Notice("A TVault operation is already running");
+      new Notice("A TrustVault operation is already running");
       return;
     }
 
@@ -692,18 +692,18 @@ export class TVaultView extends ItemView {
         // the same shares, so don't re-surface them.
         this.generatedTokens = result.operation === "seal" ? result.tokens : null;
         this.statusLine = "Locked";
-        new Notice("TVault: vault locked");
+        new Notice("TrustVault: vault locked");
       } else {
         await this.plugin.unlock(this.opInput());
         this.statusLine = "Unlocked";
         this.tokenInputs = [];
-        new Notice("TVault: vault unlocked");
+        new Notice("TrustVault: vault unlocked");
       }
     } catch (error) {
       const message = errorMessage(error);
       this.statusLine = `Error: ${message}`;
-      new Notice(`TVault: ${message}`, 10000);
-      console.error("TVault panel action failed", error);
+      new Notice(`TrustVault: ${message}`, 10000);
+      console.error("TrustVault panel action failed", error);
     } finally {
       this.busy = false;
       await this.refresh();

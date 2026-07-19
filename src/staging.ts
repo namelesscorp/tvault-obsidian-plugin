@@ -70,7 +70,7 @@ export async function unstageNotes(vaultPath: string): Promise<void> {
     try {
       await rename(path.join(stageDir, name), target);
     } catch (error) {
-      console.error(`TVault: failed to restore ${name}`, error);
+      console.error(`TrustVault: failed to restore ${name}`, error);
       failed.push(name);
     }
   }

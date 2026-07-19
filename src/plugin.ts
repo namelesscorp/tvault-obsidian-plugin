@@ -48,14 +48,14 @@ export default class TVaultPlugin extends Plugin {
   async onload(): Promise<void> {
     await this.loadSettings();
     this.statusEl = this.addStatusBarItem();
-    this.setStatus("TVault: ready");
+    this.setStatus("TrustVault: ready");
 
     // Recover notes left in staging by an interrupted lock before anything else
     // touches the vault.
     await this.recoverStage();
 
     this.registerView(VIEW_TYPE_TVAULT, (leaf) => new TVaultView(leaf, this));
-    this.addRibbonIcon("shield", "Open TVault panel", () => {
+    this.addRibbonIcon("shield", "Open TrustVault panel", () => {
       void this.activateView();
     });
 
@@ -103,7 +103,7 @@ export default class TVaultPlugin extends Plugin {
     if (!leaf) {
       const right = workspace.getRightLeaf(false);
       if (!right) {
-        new Notice("TVault: unable to open side panel");
+        new Notice("TrustVault: unable to open side panel");
         return;
       }
       leaf = right;
@@ -199,12 +199,12 @@ export default class TVaultPlugin extends Plugin {
     }
     try {
       await unstageNotes(vaultPath);
-      new Notice("TVault: recovered notes from an interrupted lock");
+      new Notice("TrustVault: recovered notes from an interrupted lock");
     } catch (error) {
       const message = errorMessage(error);
       // Persistent notice (timeout 0): the user must resolve this before data is safe.
-      new Notice(`TVault: could not fully recover staged notes — ${message}`, 0);
-      console.error("TVault recoverStage failed", error);
+      new Notice(`TrustVault: could not fully recover staged notes — ${message}`, 0);
+      console.error("TrustVault recoverStage failed", error);
     }
   }
 
@@ -218,7 +218,7 @@ export default class TVaultPlugin extends Plugin {
     try {
       await this.app.vault.adapter.write(this.statePath(), JSON.stringify(state, null, 2));
     } catch (error) {
-      console.error("TVault: failed to write state", error);
+      console.error("TrustVault: failed to write state", error);
     }
   }
 
@@ -354,13 +354,13 @@ export default class TVaultPlugin extends Plugin {
     const cli = await this.resolveCli();
     const args = buildArgs(spec, vaultPath, containerPath);
 
-    this.setStatus(`TVault: ${spec.operation} 0%`);
+    this.setStatus(`TrustVault: ${spec.operation} 0%`);
     try {
       const stdout = await this.spawnCli(cli, args, spec.folderPathOverride ?? vaultPath, spec);
-      this.setStatus(`TVault: ${spec.operation} done`);
+      this.setStatus(`TrustVault: ${spec.operation} done`);
       return { tokens: extractTokenList(stdout), stdout };
     } catch (error) {
-      this.setStatus("TVault: error");
+      this.setStatus("TrustVault: error");
       throw error;
     }
   }
@@ -370,7 +370,7 @@ export default class TVaultPlugin extends Plugin {
   // both proceed.
   private async withLock<T>(fn: () => Promise<T>): Promise<T> {
     if (this.running) {
-      throw new Error("A TVault operation is already running");
+      throw new Error("A TrustVault operation is already running");
     }
     this.running = true;
     try {
@@ -402,7 +402,7 @@ export default class TVaultPlugin extends Plugin {
           const match = /^PROGRESS\s+(\d{1,3})$/.exec(line.trim());
           if (match) {
             const percent = Number.parseInt(match[1], 10);
-            this.setStatus(`TVault: ${spec.operation} ${percent}%`);
+            this.setStatus(`TrustVault: ${spec.operation} ${percent}%`);
             spec.onProgress?.(percent);
           }
         }
@@ -651,8 +651,8 @@ export default class TVaultPlugin extends Plugin {
         // Restore plaintext so a failed lock never loses data.
         await unstageNotes(vaultPath).catch((restoreError) => {
           const message = errorMessage(restoreError);
-          console.error("TVault: failed to restore staged notes", restoreError);
-          new Notice(`TVault: ${message}`, 0);
+          console.error("TrustVault: failed to restore staged notes", restoreError);
+          new Notice(`TrustVault: ${message}`, 0);
         });
         throw error;
       }
@@ -777,7 +777,7 @@ export default class TVaultPlugin extends Plugin {
 
   private async commandLock(closeAfter: boolean): Promise<void> {
     if (this.running) {
-      new Notice("A TVault operation is already running");
+      new Notice("A TrustVault operation is already running");
       return;
     }
     if (this.settings.confirmBeforeLock) {
@@ -795,7 +795,7 @@ export default class TVaultPlugin extends Plugin {
       }
     }
     const secret = await this.requestSecret(
-      "Lock TVault",
+      "Lock TrustVault",
       "Enter the passphrase. Share/master vaults read tokens from the file path in settings.",
     );
     if (secret === null) {
@@ -804,27 +804,29 @@ export default class TVaultPlugin extends Plugin {
     try {
       const result = await this.lock(this.commandOpInput(secret));
       if (result.tokens && result.tokens.length > 0) {
-        new Notice(`TVault locked. ${result.tokens.length} token(s) written to the token file.`);
+        new Notice(
+          `TrustVault locked. ${result.tokens.length} token(s) written to the token file.`,
+        );
       } else {
-        new Notice("TVault: vault locked");
+        new Notice("TrustVault: vault locked");
       }
       if (closeAfter) {
         window.setTimeout(() => window.close(), 250);
       }
     } catch (error) {
       const message = errorMessage(error);
-      new Notice(`TVault: ${message}`, 10000);
-      console.error("TVault lock failed", error);
+      new Notice(`TrustVault: ${message}`, 10000);
+      console.error("TrustVault lock failed", error);
     }
   }
 
   private async commandUnlock(): Promise<void> {
     if (this.running) {
-      new Notice("A TVault operation is already running");
+      new Notice("A TrustVault operation is already running");
       return;
     }
     const secret = await this.requestSecret(
-      "Unlock TVault",
+      "Unlock TrustVault",
       "Enter the passphrase. Share/master vaults read tokens from the file path in settings.",
     );
     if (secret === null) {
@@ -832,11 +834,11 @@ export default class TVaultPlugin extends Plugin {
     }
     try {
       await this.unlock(this.commandOpInput(secret));
-      new Notice("TVault: vault unlocked");
+      new Notice("TrustVault: vault unlocked");
     } catch (error) {
       const message = errorMessage(error);
-      new Notice(`TVault: ${message}`, 10000);
-      console.error("TVault unlock failed", error);
+      new Notice(`TrustVault: ${message}`, 10000);
+      console.error("TrustVault unlock failed", error);
     }
   }
 }

@@ -1,4 +1,4 @@
-// Shared types, constants, and defaults for the TVault plugin.
+// Shared types, constants, and defaults for the TrustVault plugin.
 
 export type TokenType = "share" | "master" | "none";
 export type IntegrityType = "hmac" | "none";

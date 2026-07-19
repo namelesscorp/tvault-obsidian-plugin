@@ -17,7 +17,7 @@ export class VaultPaths {
   getVaultPath(): string {
     const adapter = this.app.vault.adapter as { getBasePath?: () => string };
     if (!adapter.getBasePath) {
-      throw new Error("TVault requires Obsidian desktop with a local filesystem vault");
+      throw new Error("TrustVault requires Obsidian desktop with a local filesystem vault");
     }
     return path.resolve(adapter.getBasePath());
   }
