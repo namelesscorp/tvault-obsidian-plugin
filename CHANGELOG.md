@@ -1,9 +1,17 @@
 # Changelog
 
-All notable changes to the TVault Obsidian plugin are documented in this file.
+All notable changes to the TrustVault Obsidian plugin are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.2.1] — 2026-07-19
+
+### Changed
+
+- Renamed the plugin to **TrustVault** (display name only — the plugin id and
+  the on-disk container format are unchanged).
+- Added the project website link to the README.
 
 ## [0.2.0] — 2026-07-19
 
@@ -30,7 +38,7 @@ user-facing feature changes since 0.1.0.
 
 ## [0.1.0] — 2026-07-19
 
-First release. TVault turns an Obsidian vault into a lockable encrypted safe:
+First release. TrustVault turns an Obsidian vault into a lockable encrypted safe:
 **Lock** compresses and encrypts your notes into a `tvault-core` container and
 removes the plaintext; **Unlock** restores them. The `.obsidian` config (and this
 plugin) is always preserved.
@@ -76,5 +84,6 @@ plugin) is always preserved.
 - Desktop only — the plugin runs a native binary.
 - Obsidian 1.7.2 or newer.
 
+[0.2.1]: https://github.com/namelesscorp/tvault-obsidian-plugin/releases/tag/0.2.1
 [0.2.0]: https://github.com/namelesscorp/tvault-obsidian-plugin/releases/tag/0.2.0
 [0.1.0]: https://github.com/namelesscorp/tvault-obsidian-plugin/releases/tag/0.1.0

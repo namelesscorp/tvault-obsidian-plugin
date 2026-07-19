@@ -1,4 +1,4 @@
-# Publishing TVault to the Obsidian community plugins
+# Publishing TrustVault to the Obsidian community plugins
 
 ## 1. Release artifacts
 
@@ -23,7 +23,7 @@ previous entry), then open a PR:
 ```json
 {
   "id": "tvault",
-  "name": "TVault",
+  "name": "TrustVault",
   "author": "Nameless Corp",
   "description": "Lock your notes into an encrypted container and unlock them again, powered by the tvault-core CLI.",
   "repo": "namelesscorp/tvault-obsidian-plugin"
@@ -47,11 +47,11 @@ what you actually create). `id` must equal `manifest.json.id` (`tvault`).
 
 ## 4. Draft PR
 
-**Title:** `Add plugin: TVault`
+**Title:** `Add plugin: TrustVault`
 
 **Body:**
 
-> ### TVault
+> ### TrustVault
 >
 > Turns an Obsidian vault into a lockable encrypted safe. **Lock** compresses and
 > encrypts your notes into a `tvault-core` container and removes the plaintext;
