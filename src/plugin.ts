@@ -60,8 +60,8 @@ export default class TVaultPlugin extends Plugin {
     });
 
     this.addCommand({
-      id: "open-tvault-panel",
-      name: "Open TVault panel",
+      id: "open-panel",
+      name: "Open panel",
       callback: () => void this.activateView(),
     });
     this.addCommand({
@@ -85,7 +85,6 @@ export default class TVaultPlugin extends Plugin {
 
   onunload(): void {
     this.forgetSessionKeys();
-    this.app.workspace.detachLeavesOfType(VIEW_TYPE_TVAULT);
   }
 
   // ---- session key cache (delegates to SessionKeyStore) ----------------------
@@ -118,7 +117,11 @@ export default class TVaultPlugin extends Plugin {
   }
 
   private async loadSettings(): Promise<void> {
-    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+    this.settings = Object.assign(
+      {},
+      DEFAULT_SETTINGS,
+      (await this.loadData()) as Partial<TVaultSettings>,
+    );
   }
 
   async saveSettings(): Promise<void> {
@@ -408,7 +411,7 @@ export default class TVaultPlugin extends Plugin {
         stderr += chunk.toString("utf8");
       });
       // A hung CLI would otherwise leave the operation guard stuck forever.
-      const timer = setTimeout(
+      const timer = window.setTimeout(
         () => {
           child.kill();
           reject(new Error("tvault-core timed out"));
@@ -416,11 +419,11 @@ export default class TVaultPlugin extends Plugin {
         30 * 60 * 1000,
       );
       child.on("error", (error) => {
-        clearTimeout(timer);
+        window.clearTimeout(timer);
         reject(error);
       });
       child.on("close", (code) => {
-        clearTimeout(timer);
+        window.clearTimeout(timer);
         if (code === 0) {
           resolve(stdout);
           return;
@@ -444,16 +447,16 @@ export default class TVaultPlugin extends Plugin {
       let stderr = "";
       child.stdout.on("data", (chunk: Buffer) => (stdout += chunk.toString("utf8")));
       child.stderr.on("data", (chunk: Buffer) => (stderr += chunk.toString("utf8")));
-      const timer = setTimeout(() => {
+      const timer = window.setTimeout(() => {
         child.kill();
         reject(new Error("tvault-core timed out"));
       }, 60 * 1000);
       child.on("error", (error) => {
-        clearTimeout(timer);
+        window.clearTimeout(timer);
         reject(error);
       });
       child.on("close", (code) => {
-        clearTimeout(timer);
+        window.clearTimeout(timer);
         code === 0 ? resolve(stdout) : reject(new Error(extractCliError(stderr || stdout, code)));
       });
     });
@@ -477,9 +480,7 @@ export default class TVaultPlugin extends Plugin {
     }
     if (input.useTokenFile) {
       if (!this.paths.isSafeVaultSideLocation(vaultPath, tokenFilePath)) {
-        throw new Error(
-          "The token file must be outside the vault or inside its .obsidian config folder",
-        );
+        throw new Error("The token file must be outside the vault or inside its config folder");
       }
       return { tokenIO: "file", tokensFlag: "", tokenFilePath };
     }
@@ -784,7 +785,7 @@ export default class TVaultPlugin extends Plugin {
         new ConfirmModal(
           this.app,
           closeAfter ? "Lock and close vault?" : "Lock vault?",
-          "The vault will be encrypted into the container and the plaintext removed after the container is verified. .obsidian is preserved.",
+          "The vault will be encrypted into the container and the plaintext removed after the container is verified. The Obsidian config folder is preserved.",
           closeAfter ? "Lock and close" : "Lock",
           resolve,
         ).open();

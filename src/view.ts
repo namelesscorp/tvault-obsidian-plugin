@@ -483,7 +483,7 @@ export class TVaultView extends ItemView {
   // note plus the escape hatches to enter different keys or forget the held ones.
   private renderHeldKeys(root: HTMLElement): void {
     const field = root.createDiv({ cls: "tvault-field" });
-    field.createEl("div", {
+    field.createDiv({
       cls: "tvault-held-note",
       text: "🔑 Keys are held for this session — lock/unlock without re-entering them. They are kept in memory only and cleared when Obsidian closes.",
     });
@@ -645,7 +645,7 @@ export class TVaultView extends ItemView {
           new ConfirmModal(
             this.app,
             "Lock vault?",
-            "The vault will be encrypted into the container and the plaintext removed after the container is verified. .obsidian is preserved.",
+            "The vault will be encrypted into the container and the plaintext removed after the container is verified. The Obsidian config folder is preserved.",
             "Lock",
             resolve,
           ).open();
@@ -743,12 +743,13 @@ export class TVaultView extends ItemView {
     input.value = value;
     input.addEventListener("input", () => onChange(input.value));
     const browse = row.createEl("button", { text: "Browse" });
-    browse.addEventListener("click", async () => {
-      const chosen = await browseForExistingFile("Choose token file", input.value, ["json"]);
-      if (chosen) {
-        input.value = chosen;
-        onChange(chosen);
-      }
+    browse.addEventListener("click", () => {
+      void browseForExistingFile("Choose token file", input.value, ["json"]).then((chosen) => {
+        if (chosen) {
+          input.value = chosen;
+          onChange(chosen);
+        }
+      });
     });
   }
 

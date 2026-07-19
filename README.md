@@ -4,6 +4,28 @@ Desktop-only Obsidian plugin that wraps the `tvault-core` CLI and turns a vault
 into a lockable safe: **Lock** encrypts your notes into a container and removes
 the plaintext; **Unlock** restores the notes from the container.
 
+## Screenshots
+
+**Side panel** — the current state and one primary action (lock when unlocked,
+unlock when locked):
+
+![TVault side panel](docs/screenshots/panel.png)
+
+**Generated tokens** — save the Shamir shares to a file, or copy each share
+individually:
+
+![Generated share tokens](docs/screenshots/tokens.png)
+
+**Container details** — created / last re-lock, size, security score, token type,
+shares / threshold and more:
+
+![Container details panel](docs/screenshots/container-details.png)
+
+**Gathering entropy** — draw inside the box to mix randomness into the container
+key:
+
+![Entropy collection](docs/screenshots/entropy.png)
+
 ## The lock / unlock model
 
 - **Unlocked** — plaintext notes are present in the vault.
@@ -96,8 +118,8 @@ npm run bundle         # both of the above
 The CLI binaries are published by the `tvault-core` repository's
 `Release CLI binaries` workflow (tag `vX.Y.Z`), which cross-compiles
 darwin/linux/windows on amd64 and arm64. The plugin's own `Release plugin`
-workflow (tag `X.Y.Z`) builds and attaches `main.js`, `manifest.json`,
-`styles.css`, and `versions.json`.
+workflow (tag `X.Y.Z`) builds and attaches `main.js`, `manifest.json`, and
+`styles.css`.
 
 Releasing a new CLI version:
 

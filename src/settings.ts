@@ -14,13 +14,14 @@ export class TVaultSettingTab extends PluginSettingTab {
   display(): void {
     const { containerEl } = this;
     containerEl.empty();
-    containerEl.createEl("h2", { text: "TVault" });
+    const cfg = this.app.vault.configDir; // usually ".obsidian", but user-configurable
+    new Setting(containerEl).setName("TVault").setHeading();
     containerEl.createEl("p", {
       text:
         "Locking encrypts the vault into the container and removes the " +
-        "plaintext (the .obsidian config is always preserved). Leave the paths " +
+        `plaintext (the ${cfg} config is always preserved). Leave the paths ` +
         "empty to keep the container and token file self-contained under " +
-        ".obsidian/tvault/, or set paths outside the vault.",
+        `${cfg}/tvault/, or set paths outside the vault.`,
     });
 
     new Setting(containerEl)
@@ -42,12 +43,12 @@ export class TVaultSettingTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("Encrypted container")
       .setDesc(
-        "Empty → .obsidian/tvault/<vault>.tvlt (self-contained). Or an absolute " +
+        `Empty → ${cfg}/tvault/<vault>.tvlt (self-contained). Or an absolute ` +
           "path outside the vault. It must never sit in the note area.",
       )
       .addText((text) =>
         text
-          .setPlaceholder("(default) .obsidian/tvault/<vault>.tvlt")
+          .setPlaceholder(`(default) ${cfg}/tvault/<vault>.tvlt`)
           .setValue(this.plugin.settings.containerPath)
           .onChange(async (value) => {
             this.plugin.settings.containerPath = value.trim();
@@ -67,12 +68,12 @@ export class TVaultSettingTab extends PluginSettingTab {
     const tokenSetting = new Setting(containerEl)
       .setName("Token file")
       .setDesc(
-        "Empty → .obsidian/tvault/<vault>.keys.json. Used by the command palette " +
+        `Empty → ${cfg}/tvault/<vault>.keys.json. Used by the command palette ` +
           "and the panel's token-file option; not used with token type none.",
       )
       .addText((text) =>
         text
-          .setPlaceholder("(default) .obsidian/tvault/<vault>.keys.json")
+          .setPlaceholder(`(default) ${cfg}/tvault/<vault>.keys.json`)
           .setValue(this.plugin.settings.tokenPath)
           .onChange(async (value) => {
             this.plugin.settings.tokenPath = value.trim();

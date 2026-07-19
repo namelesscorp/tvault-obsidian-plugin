@@ -7,7 +7,8 @@
   `tvault-core-<os>-<arch>[.exe]` + `checksums.txt`.
 - **Plugin** — in the plugin repo push a tag `0.1.0` (must equal
   `manifest.json.version`, no leading `v`). The `Release plugin` workflow
-  publishes `main.js`, `manifest.json`, `styles.css`, `versions.json`.
+  publishes `main.js`, `manifest.json`, `styles.css` (with build provenance
+  attestation).
 
 Before tagging the plugin, make sure `cli-checksums.json` was regenerated for the
 released CLI version (`npm run build:cli`) and committed, so the checksums baked
@@ -38,7 +39,8 @@ what you actually create). `id` must equal `manifest.json.id` (`tvault`).
 - [ ] A GitHub release named exactly `0.1.0` (no `v`) contains `main.js`,
       `manifest.json`, and `styles.css` as individual assets.
 - [ ] `manifest.json` `id` is `tvault` (unique, no "obsidian"/"plugin" in it).
-- [ ] `minAppVersion` (`1.5.0`) exists as a key in `versions.json`.
+- [ ] `manifest.json` `minAppVersion` (`1.7.2`) matches `versions.json`'s value
+      for `0.1.0`.
 - [ ] `isDesktopOnly` is `true` (the plugin runs a native binary).
 - [ ] LICENSE present (MIT).
 - [ ] README explains what the plugin does and how the CLI binary is obtained.

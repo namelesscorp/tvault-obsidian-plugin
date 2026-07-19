@@ -46,13 +46,10 @@ export function getElectronShell(): {
 // pickExistingFile - fallback picker (Electron adds `.path` to the File object).
 export function pickExistingFile(accept: string): Promise<string | null> {
   return new Promise((resolve) => {
-    const input = document.createElement("input");
-    input.type = "file";
-    if (accept) {
-      input.accept = accept;
-    }
+    const input = createEl("input", { attr: { type: "file", ...(accept ? { accept } : {}) } });
     input.addEventListener("change", () => {
-      const file = input.files?.[0] as (File & { path?: string }) | undefined;
+      // Electron adds a `path` property to the selected File.
+      const file: (File & { path?: string }) | undefined = input.files?.[0];
       resolve(file?.path ?? null);
     });
     input.click();

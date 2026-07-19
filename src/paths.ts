@@ -1,4 +1,5 @@
 import type { App, PluginManifest } from "obsidian";
+import { homedir } from "os";
 import path from "path";
 import { cliBinaryName } from "./cli";
 import type { TVaultSettings } from "./types";
@@ -21,15 +22,16 @@ export class VaultPaths {
     return path.resolve(adapter.getBasePath());
   }
 
+  // The user's config folder is usually `.obsidian` but can be renamed.
   configDirName(): string {
-    return (this.app.vault as { configDir?: string }).configDir ?? ".obsidian";
+    return this.app.vault.configDir;
   }
 
   resolveConfiguredPath(value: string): string {
     if (!value.trim()) {
       return "";
     }
-    return path.resolve(value.replace(/^~(?=$|\/|\\)/, process.env.HOME ?? "~"));
+    return path.resolve(value.replace(/^~(?=$|\/|\\)/, homedir()));
   }
 
   private isInside(parent: string, child: string): boolean {
@@ -87,9 +89,7 @@ export class VaultPaths {
   resolveContainerPath(vaultPath: string): string {
     const containerPath = this.effectiveContainerPath(vaultPath);
     if (!this.isSafeVaultSideLocation(vaultPath, containerPath)) {
-      throw new Error(
-        "The container must be outside the vault or inside its .obsidian config folder",
-      );
+      throw new Error("The container must be outside the vault or inside its config folder");
     }
     return containerPath;
   }

@@ -1,7 +1,7 @@
 import esbuild from "esbuild";
 import process from "process";
 import { existsSync, readFileSync } from "fs";
-import builtins from "builtin-modules";
+import { builtinModules } from "module";
 
 const production = process.argv[2] === "production";
 
@@ -17,7 +17,7 @@ const checksums = readJson("cli-checksums.json", {});
 const context = await esbuild.context({
   entryPoints: ["main.ts"],
   bundle: true,
-  external: ["obsidian", "electron", ...builtins],
+  external: ["obsidian", "electron", ...builtinModules],
   format: "cjs",
   target: "es2018",
   logLevel: "info",
