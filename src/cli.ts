@@ -38,7 +38,7 @@ export async function downloadCli(name: string, dest: string): Promise<void> {
     throw new Error("No tvault-core release is pinned; set the executable path in settings");
   }
   const url = `https://github.com/${TVAULT_CLI_REPO}/releases/download/${TVAULT_CLI_VERSION}/${name}`;
-  const notice = new Notice(`TrustVault: downloading tvault-core (${name})…`, 0);
+  const notice = new Notice(`Trust Vault: downloading tvault-core (${name})…`, 0);
   try {
     // Use Obsidian's requestUrl (routed through the main process) rather than
     // fetch(): the renderer's origin (app://obsidian.md) makes a cross-origin

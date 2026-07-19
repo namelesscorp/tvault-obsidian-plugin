@@ -63,9 +63,9 @@ export async function browseForContainer(defaultPath: string): Promise<string | 
   if (dialog) {
     try {
       const result = await dialog.showSaveDialog({
-        title: "Choose TrustVault container location",
+        title: "Choose Trust Vault container location",
         defaultPath: defaultPath || undefined,
-        filters: [{ name: "TrustVault container", extensions: ["tvlt"] }],
+        filters: [{ name: "Trust Vault container", extensions: ["tvlt"] }],
       });
       return result && !result.canceled && result.filePath ? result.filePath : null;
     } catch {
@@ -89,7 +89,7 @@ export async function browseForExistingFile(
         title,
         defaultPath: defaultPath || undefined,
         properties: ["openFile"],
-        filters: [{ name: "TrustVault tokens", extensions }],
+        filters: [{ name: "Trust Vault tokens", extensions }],
       });
       return result && !result.canceled && result.filePaths && result.filePaths[0]
         ? result.filePaths[0]

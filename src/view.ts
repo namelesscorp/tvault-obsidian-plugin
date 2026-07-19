@@ -47,7 +47,7 @@ export class TVaultView extends ItemView {
   }
 
   getDisplayText(): string {
-    return "TrustVault";
+    return "Trust Vault";
   }
 
   getIcon(): string {
@@ -112,7 +112,7 @@ export class TVaultView extends ItemView {
     const root = this.contentEl;
     root.empty();
     root.addClass("tvault-panel");
-    root.createEl("h3", { text: "TrustVault" });
+    root.createEl("h3", { text: "Trust Vault" });
 
     if (this.statusError) {
       root.createEl("p", { cls: "tvault-danger", text: this.statusError });
@@ -271,7 +271,7 @@ export class TVaultView extends ItemView {
             "Token file path",
             this.tokenFilePath,
             (v) => (this.tokenFilePath = v),
-            "~/TrustVault/my-vault.keys.json",
+            "~/Trust Vault/my-vault.keys.json",
           );
         } else {
           this.renderTokenInputs(root);
@@ -571,9 +571,9 @@ export class TVaultView extends ItemView {
     let target: string | null = null;
     try {
       const result = await dialog.showSaveDialog({
-        title: "Save TrustVault tokens",
+        title: "Save Trust Vault tokens",
         defaultPath,
-        filters: [{ name: "TrustVault tokens", extensions: ["json"] }],
+        filters: [{ name: "Trust Vault tokens", extensions: ["json"] }],
       });
       target = result && !result.canceled && result.filePath ? result.filePath : null;
     } catch {
@@ -635,7 +635,7 @@ export class TVaultView extends ItemView {
       return;
     }
     if (this.plugin.isRunning()) {
-      new Notice("A TrustVault operation is already running");
+      new Notice("A Trust Vault operation is already running");
       return;
     }
 
@@ -692,18 +692,18 @@ export class TVaultView extends ItemView {
         // the same shares, so don't re-surface them.
         this.generatedTokens = result.operation === "seal" ? result.tokens : null;
         this.statusLine = "Locked";
-        new Notice("TrustVault: vault locked");
+        new Notice("Trust Vault: vault locked");
       } else {
         await this.plugin.unlock(this.opInput());
         this.statusLine = "Unlocked";
         this.tokenInputs = [];
-        new Notice("TrustVault: vault unlocked");
+        new Notice("Trust Vault: vault unlocked");
       }
     } catch (error) {
       const message = errorMessage(error);
       this.statusLine = `Error: ${message}`;
-      new Notice(`TrustVault: ${message}`, 10000);
-      console.error("TrustVault panel action failed", error);
+      new Notice(`Trust Vault: ${message}`, 10000);
+      console.error("Trust Vault panel action failed", error);
     } finally {
       this.busy = false;
       await this.refresh();

@@ -1,6 +1,6 @@
 {
   "id": "tvault",
-  "name": "TrustVault",
+  "name": "Trust Vault",
   "author": "Nameless Corp",
   "description": "Lock your notes into an encrypted container and unlock them again, powered by the tvault-core CLI.",
   "repo": "namelesscorp/tvault-obsidian-plugin"

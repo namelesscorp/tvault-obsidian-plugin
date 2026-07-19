@@ -1,4 +1,4 @@
-# TrustVault for Obsidian
+# Trust Vault for Obsidian
 
 Desktop-only Obsidian plugin that wraps the `tvault-core` CLI and turns a vault
 into a lockable safe: **Lock** encrypts your notes into a container and removes
@@ -11,7 +11,7 @@ Website: [tvault.app](https://tvault.app)
 **Side panel** — the current state and one primary action (lock when unlocked,
 unlock when locked):
 
-![TrustVault side panel](docs/screenshots/panel.png)
+![Trust Vault side panel](docs/screenshots/panel.png)
 
 **Generated tokens** — save the Shamir shares to a file, or copy each share
 individually:
@@ -41,8 +41,8 @@ cycle.
 
 ## Side panel
 
-Open the **TrustVault** side panel from the ribbon (shield icon) or the
-**TrustVault: Open TrustVault panel** command. It shows the current state and one
+Open the **Trust Vault** side panel from the ribbon (shield icon) or the
+**Trust Vault: Open Trust Vault panel** command. It shows the current state and one
 primary action:
 
 - When **unlocked**, the button **locks** the vault (first lock creates the
@@ -82,10 +82,10 @@ plaintext is kept.
 
 ## Commands
 
-- **TrustVault: Open TrustVault panel** — open the side panel.
-- **TrustVault: Lock vault** — encrypt notes and remove plaintext.
-- **TrustVault: Unlock vault** — restore notes from the container.
-- **TrustVault: Lock and close vault** — lock, then close the Obsidian window.
+- **Trust Vault: Open Trust Vault panel** — open the side panel.
+- **Trust Vault: Lock vault** — encrypt notes and remove plaintext.
+- **Trust Vault: Unlock vault** — restore notes from the container.
+- **Trust Vault: Lock and close vault** — lock, then close the Obsidian window.
 
 Command-palette actions use a single passphrase (reused for container and
 integrity) and read/write tokens via the token-file path in settings. The side
@@ -132,7 +132,7 @@ Releasing a new CLI version:
 ## Install (manual / BRAT)
 
 Copy `manifest.json`, `main.js`, and `styles.css` into
-`<vault>/.obsidian/plugins/tvault/`, then enable **TrustVault** in Obsidian's
+`<vault>/.obsidian/plugins/tvault/`, then enable **Trust Vault** in Obsidian's
 community-plugin settings. The binary downloads on first use.
 
 ## Configuration

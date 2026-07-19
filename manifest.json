@@ -1,7 +1,7 @@
 {
   "id": "tvault",
-  "name": "TrustVault",
-  "version": "0.2.2",
+  "name": "Trust Vault",
+  "version": "0.2.3",
   "minAppVersion": "1.7.2",
   "description": "Lock your notes into an encrypted container and unlock them again, powered by the tvault-core CLI.",
   "author": "Nameless Corp",
