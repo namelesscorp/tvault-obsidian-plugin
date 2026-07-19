@@ -15,7 +15,6 @@ export class TVaultSettingTab extends PluginSettingTab {
     const { containerEl } = this;
     containerEl.empty();
     const cfg = this.app.vault.configDir; // usually ".obsidian", but user-configurable
-    new Setting(containerEl).setName("TVault").setHeading();
     containerEl.createEl("p", {
       text:
         "Locking encrypts the vault into the container and removes the " +
